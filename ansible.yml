@@ -1,0 +1,29 @@
+- hosts: wclient
+  gather_facts: no
+  tasks:
+  - name: Create temporary folder to save the downloaded file
+    win_tempfile:
+      state: directory
+      path: C:\temp
+      
+
+#  - name: Download the installation file
+#    win_get_url:
+#      url: http://download.notepad-plus-plus.org/repository/7.x/7.8.1/npp.7.8.1.Installer.exe
+#      dest: C:\temp
+#      force: yes
+
+# - name: Installation
+#    win_package:
+#      path: C:\temp\npp.7.8.1.Installer.exe
+#      product_id: '{B298D29A-A6ED-11DE-BA8C-A68E55D89593}'
+#      wait: yes
+#      state: present
+  
+  - name: Install with Raw
+    raw: Start-Process -FilePath "C:\temp\npp.7.8.1.Installer.exe" -ArgumentList "/S /v/qn" -PassThru
+    
+
+
+
+    
